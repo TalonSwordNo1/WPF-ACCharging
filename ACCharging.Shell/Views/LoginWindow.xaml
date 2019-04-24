@@ -1,0 +1,55 @@
+﻿<Window x:Class="ACCharging.Shell.Views.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ACCharging.Shell.Views"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        xmlns:shell="clr-namespace:ACCharging.Shell"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        Icon="../Images/14.png"
+        Title="User Login" Height="320" Width="350">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1.6*"/>
+            <RowDefinition Height="1.6*"/>
+            <RowDefinition Height="1.6*"/>
+            <RowDefinition Height="1.6*"/>
+            <RowDefinition Height="1.6*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Text="User Login" Style="{StaticResource CommonTextBlock}"></TextBlock>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="1" FocusManager.FocusedElement="{Binding ElementName=txtUserName}">
+            <TextBox x:Name="txtUserName" Text="{Binding UserName, Mode=TwoWay}" Style="{StaticResource LoginTextBox}" TabIndex="0"></TextBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Grid.Column="1">
+            <PasswordBox x:Name="txtPassword" 
+                         shell:PasswordBoxHelper.Password="{Binding Password, Mode=TwoWay}" 
+                         Style="{StaticResource LoginPasswordBox}" TabIndex="1"></PasswordBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="4" Grid.Column="1">
+            <CheckBox x:Name="chbRemember" Content="Remember Password" 
+                      IsChecked="{Binding RememberPassword, Mode=TwoWay}"
+                      Style="{StaticResource RememberCheckbox}" TabIndex="2"></CheckBox>
+        </StackPanel>
+
+        <StackPanel Grid.Row="5" Grid.Column="1">
+            <Button x:Name="btnLogin" Content="Login" Style="{StaticResource LoginButton}" TabIndex="3"
+                    Command="{Binding LoginCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window, Mode=FindAncestor}}" IsDefault="True"></Button>
+        </StackPanel>
+    </Grid>
+</Window>

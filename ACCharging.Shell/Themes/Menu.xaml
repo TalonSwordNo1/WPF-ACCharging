@@ -1,0 +1,8 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ACCharging.Shell.Themes">
+    
+    <Style x:Key="DefaultMenuItem" TargetType="{x:Type MenuItem}">
+        <Setter Property="Foreground" Value="Black"></Setter>
+    </Style>    
+</ResourceDictionary>

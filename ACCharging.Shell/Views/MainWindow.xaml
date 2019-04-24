@@ -1,0 +1,103 @@
+﻿<Views:BaseWindow x:Class="ACCharging.Shell.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ACCharging.Shell"
+        xmlns:Views="clr-namespace:ACCharging.Shell.Views"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        Icon="../Images/14.png"
+        Title="AC Charging Platform" Height="800" Width="1280">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="#313131">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <Button x:Name="btnNewTask" Style="{StaticResource MainWindowButtons}" Command="{Binding NewTaskCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="../Images/Contacts.png" Width="18" Height="18" Margin="0 0 5 0"></Image>
+                        <TextBlock Text="New Task" VerticalAlignment="Center"></TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="btnLoadTask" Style="{StaticResource MainWindowButtons}" Command="{Binding LoadTaskCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="../Images/MobileCast.png" Width="18" Height="18" Margin="0 0 5 0"></Image>
+                        <TextBlock Text="Load Task" VerticalAlignment="Center"></TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="btnViewResult" Style="{StaticResource MainWindowButtons}" Command="{Binding ViewReportCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="../Images/Trism.png" Width="18" Height="18" Margin="0 0 5 0"></Image>
+                        <TextBlock Text="View Result" VerticalAlignment="Center"></TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Menu HorizontalAlignment="Left" VerticalAlignment="Center" Background="Transparent" Foreground="White">
+                    <MenuItem Style="{StaticResource DefaultMenuItem}">
+                        <MenuItem.Header>
+                            <Image Source="../Images/Trism.png" Width="18" Height="18"/>
+                        </MenuItem.Header>
+                        <MenuItem Header="User Management" Command="{Binding ShowUserManageCommand}">
+                            <MenuItem.Icon>
+                                <Image Source="../Images/Contacts.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+
+                    <MenuItem Header="Help">
+                        <MenuItem Header="Restart" Style="{StaticResource DefaultMenuItem}" Command="{Binding RestartCommand}"/>
+                        <MenuItem Header="System Help" Style="{StaticResource DefaultMenuItem}"/>
+                        <MenuItem Header="About" Style="{StaticResource DefaultMenuItem}"/>
+                    </MenuItem>
+                </Menu>
+            </StackPanel>
+        </Grid>
+        
+        <StackPanel Grid.Row="1">
+            <ContentControl prism:RegionManager.RegionName="MainContentRegion"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2">
+            <StatusBar>
+                <StatusBar.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="6*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                    </ItemsPanelTemplate>
+                </StatusBar.ItemsPanel>
+                
+                <StatusBarItem Grid.Column="0">
+                    <TextBlock x:Name="lblSysStatus" Text="{Binding SystemStatus}"/>
+                </StatusBarItem>
+                <Separator Grid.Column="1"/>
+                <StatusBarItem Grid.Column="2">
+                    <ProgressBar Value="{Binding CurrentProgress}" Width="240" Height="20"/>
+                </StatusBarItem>
+                <Separator Grid.Column="3"/>
+                <StatusBarItem Grid.Column="4">
+                    <TextBlock x:Name="lblDatetime" Text="{Binding CurrentDatetime}"/>
+                </StatusBarItem>
+            </StatusBar>
+        </StackPanel>
+    </Grid>
+</Views:BaseWindow>
