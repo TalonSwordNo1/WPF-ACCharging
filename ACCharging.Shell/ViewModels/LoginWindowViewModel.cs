@@ -1,14 +1,16 @@
-﻿using ACCharging.Core.Services;
+﻿using ACCharging.Common;
+using ACCharging.Core.Services;
 using ACCharging.Shell.Views;
 using Prism.Commands;
 using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 using Unity.Attributes;
 
 namespace ACCharging.Shell.ViewModels
 {
     public class LoginWindowViewModel: BaseViewModel
     {
-        private string _userName = "ABC";
+        private string _userName = "admin";
         [Required(ErrorMessage = "User name is required")]
         public string UserName
         {
@@ -16,7 +18,7 @@ namespace ACCharging.Shell.ViewModels
             set { SetProperty(ref _userName, value); }
         }
 
-        private string _password = "ABC123";
+        private string _password = "admin";
         [Required(ErrorMessage = "Password is required")]
         public string Password
         {
@@ -43,9 +45,9 @@ namespace ACCharging.Shell.ViewModels
                 .ObservesProperty(() => Password);
         }
 
-        private void UserLogin(object window)
+        private async void UserLogin(object window)
         {
-            bool isLogin = CheckLoginInfo(UserName, Password);
+            bool isLogin = await CheckLoginInfo(UserName, Password);
             if (isLogin)
             {
                 LoginWindow loginWindow = window as LoginWindow;
@@ -61,12 +63,12 @@ namespace ACCharging.Shell.ViewModels
             return !string.IsNullOrEmpty(UserName) && !string.IsNullOrEmpty(Password);
         }
 
-        private bool CheckLoginInfo(string userName, string password)
+        private async Task<bool> CheckLoginInfo(string userName, string password)
         {
-            var user = UserService.GetUserInfoByName(userName);
+            var user = await UserService.GetUserInfoByName(userName);
             if (user != null)
             {
-                if (user.Result.Password == password)
+                if (user.Password == CryptographyHelper.Encrypt(password))
                 {
                     return true;
                 }

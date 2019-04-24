@@ -25,6 +25,7 @@ namespace ACCharging.Shell.ViewModels
         private void ConfirmNewTask()
         {
             //
+            var no = CaseService.GetTestCaseNo();
         }
     }
 }
