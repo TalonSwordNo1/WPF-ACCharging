@@ -10,7 +10,7 @@ using Unity.Attributes;
 
 namespace ACCharging.Shell.ViewModels
 {
-    public class NewTaskWindowViewModel: BaseViewModel
+    public class NewTaskWindowViewModel: BaseWindowViewModel
     {
         [Dependency]
         public CaseService CaseService { get; set; }

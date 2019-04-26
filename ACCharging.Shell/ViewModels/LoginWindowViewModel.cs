@@ -8,7 +8,7 @@ using Unity.Attributes;
 
 namespace ACCharging.Shell.ViewModels
 {
-    public class LoginWindowViewModel: BaseViewModel
+    public class LoginWindowViewModel: BaseWindowViewModel
     {
         private string _userName = "admin";
         [Required(ErrorMessage = "User name is required")]

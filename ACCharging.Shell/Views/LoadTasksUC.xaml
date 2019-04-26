@@ -17,7 +17,18 @@
     </i:Interaction.Triggers>
     
     <Grid>
-        <TextBlock Text="Load Task"/>
-        <Button x:Name="btnLoadTask" Content="Load" Command="{Binding LoadTaskCommand}" Width="80" Height="25"></Button>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <TextBlock Text="Load Task"/>
+            <Button x:Name="btnLoadTask" Content="Load" Command="{Binding LoadTaskCommand}" Width="80" Height="25"></Button>
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <ListBox ItemsSource="{Binding MessageList}"></ListBox>
+        </Grid>
     </Grid>
 </UserControl>

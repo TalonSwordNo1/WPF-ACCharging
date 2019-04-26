@@ -1,12 +1,16 @@
 ﻿using ACCharging.Common;
 using ACCharging.Core.Models;
+using ACCharging.Core.Services;
+using ACCharging.Shell.Views;
 using Prism.Commands;
 using Prism.Ioc;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using Unity.Attributes;
 
 namespace ACCharging.Shell.ViewModels
 {
-    public class UserManagementWinViewModel: BaseViewModel
+    public class UserManagementWinViewModel: BaseWindowViewModel
     {
         private ObservableCollection<UserModel> _userList;
         public ObservableCollection<UserModel> UserList
@@ -15,6 +19,9 @@ namespace ACCharging.Shell.ViewModels
             set { SetProperty(ref _userList, value); }
         }
 
+        [Dependency]
+        public UserService UserService { get; set; }
+
         public DelegateCommand ShowNewUserCommand { get; set; }
         public DelegateCommand<object> DeleteUserCommand { get; set; }
 
@@ -22,13 +29,18 @@ namespace ACCharging.Shell.ViewModels
         {
             ShowNewUserCommand = new DelegateCommand(ShowNewUserWin);
             DeleteUserCommand = new DelegateCommand<object>(DeleteUser);
+        }
 
-            UserList = GetAllUsers();
+        public override void InitViewModel()
+        {
+            base.InitViewModel();
+            UserList = new ObservableCollection<UserModel>(GetAllUsers().Result);
         }
 
         private void ShowNewUserWin()
         {
-            
+            var newUserWindow = new NewUserWindow();
+            newUserWindow.ShowDialog();
         }
 
         private void DeleteUser(object obj)
@@ -36,27 +48,12 @@ namespace ACCharging.Shell.ViewModels
             UserModel user = obj as UserModel;
             if (user != null)
             {
-
             }
         }
 
-        private ObservableCollection<UserModel> GetAllUsers()
+        private async Task<ObservableCollection<UserModel>> GetAllUsers()
         {
-            ObservableCollection<UserModel> allUsers = new ObservableCollection<UserModel>();
-            for(int i = 1; i <= 55; i++)
-            {
-                UserModel user = new UserModel()
-                {
-                    UserName = "Name-" + i,
-                    Password = "pass-" + i,
-                    Gender = UserGender.Female,
-                    Mobile = "139223455" + i,
-                    Email = "QAWEe-" + i + "@q.com"
-                };
-                allUsers.Add(user);
-            }
-
-            return allUsers;
+            return await UserService.GetAllUsers();
         }
     }
 }

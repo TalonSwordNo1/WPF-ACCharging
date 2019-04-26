@@ -8,7 +8,7 @@ using System.Windows.Threading;
 
 namespace ACCharging.Shell.ViewModels
 {
-    public class MainWindowViewModel: BaseViewModel
+    public class MainWindowViewModel: BaseWindowViewModel
     {
         private readonly IRegionManager _regionManager;
         private DispatcherTimer dispatcherTimer;

@@ -5,9 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:ACCharging.Shell.Views"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
         Title="User Management" Height="450" Width="800">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding InitializeViewModelCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+        
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -31,7 +39,7 @@
         <Grid Grid.Row="1">
             <StackPanel>
                 <DataGrid x:Name="dtgUsers" ItemsSource="{Binding UserList}" AutoGenerateColumns="False" RowStyle="{StaticResource DataRowStyle}" 
-                          AlternationCount="2">
+                          AlternationCount="2" CanUserAddRows="False">
                     <DataGrid.Columns>
                         <DataGridCheckBoxColumn Header="Selected" Binding="{Binding IsSelected, Mode=TwoWay}" Width="60"/>
                         <DataGridTextColumn Header="User Name" Binding="{Binding UserName}" Width="100"></DataGridTextColumn>
