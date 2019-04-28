@@ -7,6 +7,7 @@ using Prism.Unity;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
+using Unity.Injection;
 
 namespace ACCharging.Shell
 {
@@ -31,11 +32,21 @@ namespace ACCharging.Shell
             //containerRegistry.RegisterForNavigation<LoadTasksUC>();
 
             containerRegistry.RegisterInstance(typeof(IContainerProvider), Container);
+            containerRegistry.Register<IUserService, UserService>();
+            containerRegistry.Register<ICaseService, CaseService>();
+            containerRegistry.Register<ITestService, TestService>();
+            containerRegistry.Register<Core.ITestReporter, Core.OT.TestReporters.TestReporterA1_1001_1>("TestReporterA110011");
+            containerRegistry.Register<Core.ITestReporter, Core.OT.TestReporters.TestReporterA1_1001_2>("TestReporterA110012");
             //containerRegistry.Register<BaseService, TestService>("TestService");
             //containerRegistry.Register<BaseService, CaseService>("CaseService");
             TestService.RegisterTestReporter(containerRegistry);
 
             containerRegistry.RegisterSingleton<DbDataContext>();
+
+
+            //Unity.IUnityContainer unityContainer = new Unity.UnityContainer();
+            //unityContainer.RegisterType(typeof(Core.ITestReporter), typeof(Core.OT.TestReporters.TestReporterA1_1001_1,new InjectionConstructor(new ResolvedParameter<Core.ITestReporter>("")));
+
 
             base.RegisterRequiredTypes(containerRegistry);
         }

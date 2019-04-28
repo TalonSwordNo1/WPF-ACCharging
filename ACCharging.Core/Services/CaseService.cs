@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ACCharging.Core.Services
 {
-    public class CaseService : BaseService
+    public class CaseService : BaseService, ICaseService
     {
         public IContainerProvider _container;
 

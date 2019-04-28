@@ -13,12 +13,17 @@ namespace ACCharging.Shell.ViewModels
     public class NewTaskWindowViewModel: BaseWindowViewModel
     {
         [Dependency]
-        public CaseService CaseService { get; set; }
+        public ICaseService CaseService { get; set; }
+
+        
+        private Core.ITestReporter TestReporterA110012 { get; set; }
 
         public DelegateCommand ConfirmCommand { get; set; }
 
-        public NewTaskWindowViewModel()
+        public NewTaskWindowViewModel(IContainerProvider containerProvider)
         {
+            TestReporterA110012 = containerProvider.Resolve(typeof(Core.ITestReporter), "TestReporterA110012") as Core.ITestReporter;
+
             ConfirmCommand = new DelegateCommand(ConfirmNewTask);
         }
 

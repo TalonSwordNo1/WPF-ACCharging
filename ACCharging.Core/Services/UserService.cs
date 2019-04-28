@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ACCharging.Core.Services
 {
-    public class UserService : BaseService
+    public class UserService : BaseService, IUserService
     {
         public async Task NewUser(UserModel userModel)
         {

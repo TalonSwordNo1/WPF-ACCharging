@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ACCharging.Core.Services
 {
-    public class TestService : BaseService
+    public class TestService : BaseService, ITestService
     {
         public IContainerProvider _container;
 
@@ -17,8 +17,6 @@ namespace ACCharging.Core.Services
         {
             _container = container;
         }
-
-
 
         public static void RegisterTestReporter(IContainerRegistry containerRegistry)
         {

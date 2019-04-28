@@ -59,7 +59,7 @@ namespace ACCharging.Shell.ViewModels
         }
 
         [Dependency]
-        public UserService UserService { get; set; }
+        public IUserService UserService { get; set; }
 
         public DelegateCommand<Window> SaveCommand { get; set; }
         public DelegateCommand<Window> CancelCommand { get; set; }

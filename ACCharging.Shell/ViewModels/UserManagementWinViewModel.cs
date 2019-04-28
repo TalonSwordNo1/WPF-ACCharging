@@ -20,7 +20,7 @@ namespace ACCharging.Shell.ViewModels
         }
 
         [Dependency]
-        public UserService UserService { get; set; }
+        public IUserService UserService { get; set; }
 
         public DelegateCommand ShowNewUserCommand { get; set; }
         public DelegateCommand<object> DeleteUserCommand { get; set; }

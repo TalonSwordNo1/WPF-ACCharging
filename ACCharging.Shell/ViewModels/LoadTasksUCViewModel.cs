@@ -20,13 +20,18 @@ namespace ACCharging.Shell.ViewModels
         private IEventAggregator _ea;
 
         [Dependency]
-        public TestService TestService { get; set; }
+        public ITestService TestService { get; set; }
+
         
+        private Core.ITestReporter TestReporterA110011 { get; set; }
+
         public DelegateCommand LoadTaskCommand { get; set; }
 
-        public LoadTasksUCViewModel(IEventAggregator ea)
+        public LoadTasksUCViewModel(IEventAggregator ea, Prism.Ioc.IContainerProvider containerProvider)
         {
             _ea = ea;
+            TestReporterA110011 = containerProvider.Resolve(typeof(Core.ITestReporter), "TestReporterA110011") as Core.ITestReporter;
+
             MessageList = new ObservableCollection<string>();
 
             LoadTaskCommand = new DelegateCommand(LoadTask);

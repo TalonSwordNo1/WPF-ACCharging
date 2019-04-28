@@ -167,6 +167,9 @@
     <Compile Include="Services\Base\BaseService.cs" />
     <Compile Include="Services\CaseService.cs" />
     <Compile Include="Services\Base\IBuzService.cs" />
+    <Compile Include="Services\Base\ICaseService.cs" />
+    <Compile Include="Services\Base\ITestService.cs" />
+    <Compile Include="Services\Base\IUserService.cs" />
     <Compile Include="Services\TestService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>

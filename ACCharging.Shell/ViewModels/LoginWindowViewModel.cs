@@ -34,7 +34,7 @@ namespace ACCharging.Shell.ViewModels
         }
 
         [Dependency]
-        public UserService UserService { get; set; }
+        public IUserService UserService { get; set; }
 
         public DelegateCommand<object> LoginCommand { get; set; }
 
