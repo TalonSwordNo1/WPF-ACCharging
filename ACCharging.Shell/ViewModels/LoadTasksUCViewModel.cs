@@ -44,6 +44,7 @@ namespace ACCharging.Shell.ViewModels
         {
             base.InitViewModel();
 
+            var tcrModel = TestReporterA110011.GetResult();
             var allTestReporters = TestService.GetAllTestReporters();
         }
 

@@ -10,9 +10,11 @@ namespace ACCharging.Core.OT.TestReporters
     [TestNo("A1.1001.1", CaseName = "Test A1 1001.1")]
     public class TestReporterA1_1001_1 : BaseTestReporter
     {
-        public override Task<TestCaseResultModel> GetResult()
+        public override async Task<TestCaseResultModel> GetResult()
         {
-            return base.GetResult();
+            TestCaseResultModel tcrModel = new TestCaseResultModel();
+            tcrModel.CaseNo = "A1.1001.1";
+            return await Task.FromResult(tcrModel);
         }
     }
 }
